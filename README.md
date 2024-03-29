@@ -2,9 +2,7 @@
 
 ## Installation
 
-1. project 리빌드 실행
-
-2. 우측 하단 System Setting > IDE Menu에 아래 내용 추가
+1. 우측 하단 System Setting > IDE Menu에 아래 내용 추가
 
 ```json
 {
@@ -14,6 +12,8 @@
     "width": 240
 },
 ```
+
+2. Electron Explore > rebuild 실행
 
 3. Electron Explore > electron에서 파일 4개 확인
 

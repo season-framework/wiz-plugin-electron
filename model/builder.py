@@ -47,6 +47,13 @@ class Model:
         packageJson["scripts"]["el:build"] = "electron-builder"
         fs.write.json("build/package.json", packageJson)
 
+        if fs.exists("src/electron") == False:
+            fs.makedirs("src/electron")
+        fs.write('src/electron/.env', Code.DOTENV)
+        fs.write('src/electron/index.js', Code.ELECTRON)
+        fs.write('src/electron/paths.js', Code.PATHS)
+        fs.write('src/electron/preload.mjs', Code.PRELOAD)
+
     def __call__(self):
         self.build()
 
@@ -203,6 +210,7 @@ class Model:
         fs.copy("src/angular/wiz.ts", "build/src/wiz.ts")
         fs.copy("src/angular/index.pug", "build/src/index.pug")
 
+        # electron files
         fs.copy("src/electron", "build/electron")
 
         fs.copy("src/angular/app", "build/src/app")
@@ -246,14 +254,6 @@ class Model:
             if checker("assets"): buildFiles(module, "assets", "assets")
             if checker("libs"): buildFiles(module, "libs", "libs")
             if checker("styles"): buildFiles(module, "styles", "styles")
-        
-        # electron files
-        if fs.exists("src/electron") == False:
-            fs.makedirs("src/electron")
-        fs.write('src/electron/.env', Code.DOTENV)
-        fs.write('src/electron/index.js', Code.ELECTRON)
-        fs.write('src/electron/paths.js', Code.PATHS)
-        fs.write('src/electron/preload.mjs', Code.PRELOAD)
 
     def _build(self):
         fs = self.fs()
