@@ -1,0 +1,6 @@
+{
+    "package": "electron",
+    "title": "Electron",
+    "version": "1.0.0",
+    "repo": "https://git.tmpi.kr/wiz-plugin/electron"
+}
