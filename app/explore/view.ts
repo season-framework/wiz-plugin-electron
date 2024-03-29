@@ -348,4 +348,12 @@ export class Component implements OnInit {
         if (!res) return;
         wiz.call("electron_kill");
     }
+
+    public async rebuild() {
+        let res = await this.service.alert.show({ title: 'Rebuild', message: 'Are you sure to rebuild this project?', action: "rebuild", action_class: "btn-danger" });
+        if (!res) return;
+        await this.loader(true);
+        await wiz.call("rebuild");
+        await this.loader(false);
+    }
 }

@@ -40,6 +40,8 @@
                                 i.icon-action-always.fa-solid.fa-check((click)="requestCreateFile(data); $event.stopPropagation();")
         button.btn.btn-block.btn-primary.mt-4((click)="appStart()") Start
         button.btn.btn-block.btn-danger.mt-2((click)="appKill()") Kill
+        .d-flex.mt-2
+            button.btn.btn-sm.btn-outline-danger.ml-auto((click)="rebuild()") rebuild
     .progress(*ngIf="uploadStatus.uploading")
         .progress-bar.bg-blue(style="width: {{uploadStatus.percent}}%;")
     

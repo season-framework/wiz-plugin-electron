@@ -299,3 +299,8 @@ def electron_kill():
     elif os_name == "Windows":
         pass
     wiz.response.status(200)
+
+def rebuild():
+    builder.clean()
+    builder.build()
+    wiz.response.status(200)
