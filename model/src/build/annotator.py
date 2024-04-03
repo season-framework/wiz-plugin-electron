@@ -195,7 +195,7 @@ class API:
         if (!fn.default) throw new Error(`Not exist export default`);
         const api = "<APINAME>";
         if (!fn.default[api]) throw new Error(`Not found function ${api}`);
-        const res = await fn.default[api](...params);
+        const res = await fn.default[api](APIObject(), ...params);
         win.webContents.send("api.<NAMESPACE>.<APINAME>", { code: 200, data: res });
     } catch (err) {
         win.webContents.send("api.<NAMESPACE>.<APINAME>", { code: 404, data: err });

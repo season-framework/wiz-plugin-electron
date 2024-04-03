@@ -92,6 +92,7 @@ import {
     Notification, dialog,
     // globalShortcut,
 } from "electron";
+import electron from "electron";
 
 let win = null;
 let tray = null;
@@ -250,7 +251,21 @@ ipcMain.on("notice", async (e, body, title = "") => {
 
 ipcMain.on("open", (e, url) => {
     shell.openExternal(url);
-});"""
+});
+
+// Never remove this function(APIObject)
+// this function's return response is API's first parameter.
+/** example
+ * const func = ({ electron, win, app, ipcMain }, a, b, c) => {
+ *     const pos = win.getPosition();
+ *     console.log(pos);
+ *     console.log(a, b, c);
+ *     return pos;
+ * }
+ */
+const APIObject = () => {
+    return { electron, app, win, ipcMain };
+}"""
 
     PRELOAD = """import { ipcRenderer, contextBridge } from "electron";
 
