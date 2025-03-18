@@ -337,3 +337,23 @@ export {
     indexPath,
     assetsPath,
 };"""
+
+    INDEX_PUG = """doctype html
+html(lang="en")
+    head
+        meta(charset="utf-8")
+        title WIZ ELECTRON SAMPLE PROJECT
+        base(href="./")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        script.
+            window.addEventListener("keydown", (e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key === 'r') {
+                    e.preventDefault();
+                    window.api.send('window-refresh');
+                }
+            });
+
+    body
+        app-root
+
+"""

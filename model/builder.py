@@ -46,6 +46,8 @@ class Model:
         packageJson["scripts"]["el:dev"] = "dotenv -e electron/.env -- electron ."
         packageJson["scripts"]["el:build"] = "electron-builder"
         fs.write.json("build/package.json", packageJson)
+        
+        fs.write("src/angular/index.pug", Code.INDEX_PUG)
 
         if fs.exists("src/electron") == False:
             fs.makedirs("src/electron")
