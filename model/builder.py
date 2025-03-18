@@ -48,6 +48,7 @@ class Model:
         fs.write.json("build/package.json", packageJson)
         
         fs.write("src/angular/index.pug", Code.INDEX_PUG)
+        fs.write("src/angular/wiz.ts", Code.WIZ_TS)
 
         if fs.exists("src/electron") == False:
             fs.makedirs("src/electron")

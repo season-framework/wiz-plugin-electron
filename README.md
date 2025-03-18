@@ -2,14 +2,14 @@
 
 ## Installation
 
-1. 우측 하단 System Setting > IDE Menu에 아래 내용 추가
+1. 우측 하단 System Setting > IDE Menu에 기존의 Explore 제거 후 아래 내용 추가
 
 ```json
 {
     "name": "Electron Explore",
     "id": "electron.app.explore",
     "icon": "fa-solid fa-atom",
-    "width": 240
+    "width": 360
 },
 ```
 
@@ -41,59 +41,3 @@
     - electron-is-dev 확인
 - "devDependencies"
     - dotenv-cli, electron, electron-builder 확인
-
-6. angular > `wiz.ts` 수정
-
-- 맨 아래의 url, call 함수 주석처리(or 삭제) 후 아래 코드 추가
-
-```typescript
-public server = {
-    url: (function_name: string) => {
-        let base = window.env.API_BASE;
-        if (base.endsWith("/")) base = base.slice(0, -1);
-        if (function_name[0] == "/") function_name = function_name.substring(1);
-        return `${base}/api/${this.namespace}/${function_name}`;
-    },
-    call: (function_name: string, data = {}, options = {}) => {
-        let ajax = {
-            url: this.server.url(function_name),
-            type: "POST",
-            data: data,
-            ...options,
-        };
-
-        return new Promise((resolve) => {
-            $.ajax(ajax).always(function (res) {
-                resolve(res);
-            });
-        });
-    },
-};
-
-public send(name, ...data) {
-    window.api.send(name, ...data);
-}
-public receive(name, callback) {
-    if (!callback) return;
-    window.api.receive(name, callback);
-}
-
-public async electron(name, ...data) {
-    return new Promise((resolve) => {
-        this.receive(name, resolve);
-        this.send(name, ...data);
-    });
-}
-
-public url(function_name: string) {
-    return `api.${this.namespace}.${function_name}`;
-}
-
-public call(function_name: string, ...params) {
-    return this.electron(this.url(function_name), ...params);
-}
-```
-
-7. angular > `index.pug` 수정
-
-- base의 href값을 "/" -> "./" 로 변경
